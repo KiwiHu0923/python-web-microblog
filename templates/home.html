@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+    <header class="header">
+        <ul class="header__navigation">
+            <li class="header__navigation-item"><a href="#" class="nav__link">Home</a></li>
+            <li class="header__navigation-item"><a href="#" class="nav__link">Resume</a></li>
+            <li class="header__navigation-item"><a href="#" class="nav__link">Blogs</a></li>
+            <li class="header__navigation-item"><a href="#" class="nav__link">About</a></li>
+        </ul>
+    </header>
+    <main class="main">
+        <section>
+            <h1>Add new Entry</h1>
+            <form class="form" method="post">
+                <p class="form__input">
+                    <label for="entry" class="form__label">Entry contents:</label>
+                    <textarea name="content" id="entry" class="form__textarea"></textarea>
+                </p>
+                <button type="submit" class="form__submit">Add entry</button>
+            </form>
+        </section>
+        <section>
+            <h1>Recent posts</h1>
+            {% for entry in entries %}  {# if you have multiple posts, it will all show on the website due to the for loop #}
+                <article class="entry">
+                    <div>
+                        <h2 class="entry__title">{{ entry["content"] | truncate(30, true) }}</h2> {# '|' is a filter, "30" maens it will show up to 30 chars, and "true" means it will have a ellipsis if the char is longer than 30 #}
+                        <time class="entry__date" detetime="">．{{ entry["date"] }}</time>
+                    </div>
+                    <p class="entry__content">
+                        {{ entry["content"] }}
+                    </p>
+                </article>
+            {% endfor %}
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer__up">
+            <a class="footer__item" href="#">EMAIL</a>
+            <a class="footer__item" href="#">LINKEDIN</a>
+        </div>
+    </footer>
+</body>
+</html>
